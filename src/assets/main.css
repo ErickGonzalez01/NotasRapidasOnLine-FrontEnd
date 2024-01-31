@@ -1,0 +1,26 @@
+@import './base.css';
+
+.bg-navbar{
+  background: var(--background-navbar);
+}
+.bg-notas{
+  background: var(--background-notas);
+}
+.bg-btn{
+  background: var(--background-btn-primary);
+}
+.bg-nota{
+  background: var(--background-nota);
+}
+.c-navbar{
+  color: var(--color-navbar);
+}
+.form-width{
+  width: 20rem;
+}
+
+.p-font{
+  font-family: "Chinese Quotes", "Inter var", "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-weight: 500;
+  color: #8d8375;
+}

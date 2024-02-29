@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { Usuario } from '@/stores/usuario'
 
 import LogInView from '../views/LogInView.vue'
 import SigOutView from '../views/SigOutView.vue'
@@ -13,7 +14,8 @@ const router = createRouter({
     {
       path: '/',
       name: 'home notas',
-      component: HomeNotasView
+      component: HomeNotasView,
+
     },
     {
       path: '/ver_nota',
@@ -41,6 +43,14 @@ const router = createRouter({
       component: NuevaPasswordViewVue
     }
   ]
+})
+
+router.beforeEach((to)=>{
+  const usuario = Usuario()
+  usuario.load()
+  if(to.path=="/" && usuario.status==null || usuario.status==false){
+    return '/authentication/login'
+  }
 })
 
 export default router

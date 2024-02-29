@@ -28,38 +28,56 @@
 </style>
 <template>
     <div v-on:click="LeerNota" class="tamano bg-nota rounded p-3 animation">
-        <div class="text-truncate mb-2 fw-bold">#{{ id }}/Quill Editor</div>
+        <div class="text-truncate mb-2 fw-bold">{{ titulo }}</div>
         <div class="scroll tamano-cuerpo">
-          <QuillEditor :options="options" :content="'Hola esta es una nota ' + id" contentType="text" />
+          <QuillEditor :options="options" :content="contenido" contentType="delta"/>
         </div>
     </div>
 </template>
 <script setup>
-import { onBeforeMount} from 'vue'
-import { QuillEditor } from '@vueup/vue-quill'
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
-//const
-    const options = {
-        debug: 'info',
-        modules: {
-          toolbar: false
-        },
-        placeholder: 'Notas aqui...',
-        readOnly: true,
-        theme: 'snow'
-    }
+  import { useRouter } from 'vue-router'
+  import { Notas } from '@/stores/notas'
+
+  const router = useRouter()
+
+  const notas = Notas()
+
+  const options = {
+      debug: 'warn',
+      modules: {
+        toolbar: false
+      },
+      placeholder: 'Notas aqui...',
+      readOnly: true,
+      theme: 'snow'
+  }
     const props = defineProps({
         id:{
-            type: Number,
+            type: String,
             required: true
+        },
+        titulo:{
+          typr: String,
+          required: true
+        },
+        contenido:{
+          type: Array,
+          required: true
+        },
+        index: {
+          type: Number,
+          required: true
         }
     })
+
     function LeerNota(){
-        alert("diste click a la nota " + props.id)
+
+      notas.notaactual = props.index
+      /*console.log(notas.notaactual)
+      console.log(props.contenido)*/
+      router.push({path:"/ver_nota"}) 
+
     }
 
-    onBeforeMount(()=>{
-      alert("creando notas")
-    })
 
 </script>

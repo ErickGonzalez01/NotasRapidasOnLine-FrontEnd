@@ -24,3 +24,45 @@
   font-weight: 500;
   color: #8d8375;
 }
+
+.nr-btn-primary{
+  background-color: var(--background-btn-primary);
+  color: var(--color-navbar);
+}
+.nr-btn-primary:hover{
+  background-color: var(--background-notas);
+  color: var(--background-nota);
+}
+
+.nr-bg-primary{
+  background-color: var(--background-btn-primary);
+}
+
+.nr-bg-secundary{
+  background: var(--color-fondo-notas);
+}
+
+.nr-bg-opacity-6{
+  opacity: 0.6;
+}
+
+.nr-bg-opacity-10{
+  opacity: 1;
+}
+
+
+.nr-w-25 {
+  width: 15rem;
+}
+
+.nr-h-15 {
+  height: 10rem;
+}
+
+.nr-bg-oscuro {
+  background-color: #000;
+}
+
+.nr-bg-oscuro-opacity {
+  background: #191919d1;
+}

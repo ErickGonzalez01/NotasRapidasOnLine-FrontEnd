@@ -20,7 +20,7 @@
     import { Notas } from '@/stores/notas'
 
     const notas = Notas()
-
+    
     notas.reset()
     notas.notasApi()
 

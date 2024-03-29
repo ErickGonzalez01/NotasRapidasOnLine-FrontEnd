@@ -53,8 +53,9 @@
     </div>
 </template>
 <script setup>
-
-function onClick(){
-    alert("Nueva nota");
-}
+    import { useRouter } from 'vue-router'
+    const router = useRouter()
+    function onClick(){
+        router.push({name:'nueva_nota'})
+    }
 </script>

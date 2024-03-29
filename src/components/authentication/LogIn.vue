@@ -32,6 +32,7 @@ import { UseURLBase } from '@/stores/url_base'
 import { ref } from 'vue'
 import SpinerModal from '@/components/SpinerModal.vue'
 import DialogModal from '@/components/DialogModal.vue'
+import {NuevaPasswordStore} from '@/stores/nuevapassword'
 
 const url_base = UseURLBase()
 const usuario = Usuario()
@@ -47,6 +48,8 @@ const spiner =ref(false)
 
 const dataUser = new FormData()
 
+const nueva_pass = NuevaPasswordStore()
+
 async function LogIn() {
     spiner.value=true
     dataUser.append('correo', email.value)
@@ -55,13 +58,23 @@ async function LogIn() {
     const data = await fetch(url_base.url + "/api/authentication/login", {
         method: 'post',
         body: dataUser
-    }).then((response) => response.json())
+    }).then((response) => response.json()).catch((error)=>{
+        //console.log("Error LogIn: ", error)
+        spiner.value=false
+        texModal.value="Ocurrio un error inesperado."
+        modalDialod.value = true
+    }).catch((error)=>{
+        spiner.value=false
+        texModal.value="Ocurrio un error inesperado."
+        modalDialod.value = true
+        //console.log(error.json())
+    })
 
     if(data){
         spiner.value=false
         texModal.value=data.message
         modalDialod.value = true
-
+        console.log("LogIn Data: ", data)
         if(data.data.status){
             setTimeout(function(){
                 modalDialod.value = false
@@ -74,6 +87,16 @@ async function LogIn() {
                 restablecer()
                 router.push({path:"/"})
             },2000)            
+        }
+        if(data.data.nueva_contrasena){
+            setTimeout(()=>{
+                modalDialod.value = false
+                nueva_pass.password = password.value
+                router.push({name: 'new_password', params: {email: email.value}})
+                limpiar()
+                restablecer()
+            },2000)
+            
         }
     }
 }
